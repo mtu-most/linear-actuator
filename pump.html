@@ -1,0 +1,36 @@
+<!--
+Copyright 2013 Michigan Technological University
+Author: Bas Wijnen <bwijnen@mtu.edu>
+This design was developed as part of a project with
+the Michigan Tech Open Sustainability Technology Research Group
+http://www.appropedia.org/Category:MOST
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as
+published by the Free Software Foundation, either version 3 of the
+License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<html>
+	<head>
+		<title>Pump control interface</title>
+		<style type="text/css"></style>
+		<link href="pump.css" rel="stylesheet"/>
+		<script type="text/javascript" src="pump.js"></script>
+	</head>
+	<body onload='init ()'>
+		<p>Calibration: <span id='calibration'>-</span> ml/mm <input type="text" id="calibration_input"/><button type="button" onclick="calibrate ()">Set</button></p>
+		<p>Position: <span id='pos'>-</span> ml <input type="text" id="pos_input"/><button type="button" onclick="setpos ()">Set</button></p>
+		<p>Speed: <span id='speed'>-</span> ml/s <input type="text" id="speed_input"/><button type="button" onclick="setspeed ()">Set</button></p>
+		<p><button type="button" onclick="pull ()">Pull</button><input type="text" id="amount" value="10"/><button type="button" onclick="push ()">Push</button></p>
+		<p><button type="button" onclick="sleep ()">Sleep</button></p>
+		<p id="debug"></p>
+	</body>
+</html>
