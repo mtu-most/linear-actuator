@@ -4,6 +4,7 @@
 // the Michigan Tech Open Sustainability Technology Research Group
 // http://www.appropedia.org/Category:MOST
 // It is released under CC-BY-SA
+// includes may be found at http://github.com/mtu-most/most-scad-libraries
 
 include<fasteners.scad>
 include<steppers.scad>
