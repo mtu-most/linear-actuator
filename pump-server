@@ -57,7 +57,7 @@ a = argparse.ArgumentParser()
 a.add_argument('--port', help = 'port to listen on(8000)', default = '8000')
 a.add_argument('--pitch', help = 'lead screw pitch(.8 mm; M5)', default = .8, type = float)
 a.add_argument('--steps', help = 'motor steps per revolution(3200)', default = 3200, type = float)
-a.add_argument('--html', help = 'path to html files', default = 'html')
+a.add_argument('--html', help = 'path to html files', default = '/usr/share/pump-server/html')
 args = a.parse_args()
 
 class Pump:
