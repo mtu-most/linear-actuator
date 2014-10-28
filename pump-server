@@ -128,5 +128,6 @@ def disconnect(socket):
 	if socket in users:
 		users.remove(socket)
 
-s = websockets.RPChttpd(args.port, httpdirs = args.html.split(), target = Connection, disconnect_cb = disconnect)
+# Use address to avoid listening on IPv6, otherwise it fails to work on a Raspberry Pi.
+s = websockets.RPChttpd(args.port, address = '0.0.0.0', httpdirs = args.html.split(), target = Connection, disconnect_cb = disconnect)
 websockets.fgloop()
