@@ -1,6 +1,6 @@
 // vim: set foldmethod=marker foldmarker={,} :
 
-// Copyright 2013 Michigan Technological University
+// Copyright 2013-2015 Michigan Technological University
 // Author: Bas Wijnen <bwijnen@mtu.edu>
 // This design was developed as part of a project with
 // the Michigan Tech Open Sustainability Technology Research Group
@@ -19,82 +19,63 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-var websocket, position = 0, speed = 0, calibration = 0;
+var rpc, position = 0, speed = 0, calibration = 0;
 var positionp, speedp, calibrationp;
 
-function debug (text) {
-	var t = document.createTextNode (text);
-	var p = document.createElement ('p');
-	p.appendChild (t);
-	document.getElementById ('debug').appendChild (p);
-}
-
-function dump (obj) {
-	var s = '';
-	var i;
-	for (i in obj)
-		s += i + ': ' + obj[i] + '\n';
-	return s;
-}
-
-function init () {
-	positionp = document.getElementById ('pos');
-	speedp = document.getElementById ('speed');
-	calibrationp = document.getElementById ('calibration');
-	websocket = new WebSocket ('ws://HOSTNAME');
-	websocket.onmessage = message_cb;
-	websocket.onclose = function () { alert ('The connection to the server was lost.'); };
-	websocket.onopen = function () { websocket.send (JSON.stringify (['monitor'])); };
-}
-
-function settext (element, text) {
-	element.replaceChild (document.createTextNode (text), element.firstChild);
-}
-
-function message_cb (data) {
-	d = JSON.parse (data.data);
-	if (d[0] == 'calibration') {
-		calibration = d[1];
-		settext (calibrationp, calibration);
-	}
-	else if (d[0] == 'position') {
-		position = d[1];
-		settext (positionp, position);
+var message_obj = {
+	calibration: function(c) {
+		calibration = c;
+		settext(calibrationp, calibration);
+	},
+	position: function(p) {
+		position = p;
+		settext(positionp, position);
 		positionp.style.background = '';
-	}
-	else if (d[0] == 'speed') {
-		speed = d[1];
-		settext (speedp, speed);
-	}
-	else if (d[0] == 'move') {
+	},
+	speed: function(s) {
+		speed = s;
+		settext(speedp, speed);
+	},
+	move: function() {
 		// moving now.
 		positionp.style.background = 'red';
+	},
+	'': function(msg) {
+		console.warn('Unknown message:', msg);
 	}
-	else {
-		debug ('unknown message: ' + d);
-	}
+};
+
+function init() {
+	positionp = document.getElementById('pos');
+	speedp = document.getElementById('speed');
+	calibrationp = document.getElementById('calibration');
+	rpc = Rpc(message_obj, function() { rpc.call('monitor'); }, function() { alert('The connection to the server was lost.'); });
 }
 
-function calibrate () {
-	websocket.send (JSON.stringify (['calibrate', Number (document.getElementById ('calibration_input').value)]));
+function settext(element, text) {
+	element.replaceChild(document.createTextNode(text), element.firstChild);
 }
 
-function setpos () {
-	websocket.send (JSON.stringify (['setposition', Number (document.getElementById ('pos_input').value)]));
+function calibrate() {
+	rpc.call('calibrate', [Number(document.getElementById('calibration_input').value)]);
 }
 
-function setspeed () {
-	websocket.send (JSON.stringify (['speed', Number (document.getElementById ('speed_input').value)]));
+function setpos() {
+	rpc.call('setposition', [Number(document.getElementById('pos_input').value)]);
 }
 
-function push () {
-	websocket.send (JSON.stringify (['move', -Number (document.getElementById ('amount').value)]));
+function setspeed() {
+	rpc.call('speed', [Number(document.getElementById('speed_input').value)]);
 }
 
-function pull () {
-	websocket.send (JSON.stringify (['move', Number (document.getElementById ('amount').value)]));
+function push() {
+	rpc.call('move', [-Number(document.getElementById('amount').value)]);
 }
 
-function sleep () {
-	websocket.send (JSON.stringify (['sleep']));
+function pull() {
+	rpc.call('move', [Number(document.getElementById('amount').value)]);
+}
+
+function sleep() {
+	rpc.call('sleep');
 }

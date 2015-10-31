@@ -1,0 +1,8 @@
+# This file contains the settings for pump-server.
+# It is used by /etc/init.d/pump-server, for starting and stopping
+#  the server.
+# See /etc/init.d/pump-server for possible variables to assign.
+# If no value is given here, the default is used.
+#
+# This file is sourced as a shell script, so no spaces are allowed
+# around the = sign.
