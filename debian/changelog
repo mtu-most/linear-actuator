@@ -1,3 +1,9 @@
+pump-server (0.3-1) UNRELEASED; urgency=medium
+
+  * New release.
+
+ -- Bas Wijnen <wijnen@debian.org>  Wed, 17 Feb 2016 11:42:59 -0500
+
 pump-server (0.2-1) unstable; urgency=medium
 
   * New release.
