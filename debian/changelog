@@ -1,12 +1,14 @@
-pump-server (0.2-1) UNRELEASED; urgency=medium
+pump-server (0.2-1) unstable; urgency=medium
 
   * New release.
   * Rename websockets to websocketd.
   * Change default port to 8888.
   * Use fhs module for configuration.
   * Use rpc.js.
+  * Switch to Python3.
+  * Add dependency on python3-rpi.gpio.
 
- -- Bas Wijnen <wijnen@debian.org>  Sat, 31 Oct 2015 09:14:59 -0400
+ -- Bas Wijnen <wijnen@debian.org>  Wed, 17 Feb 2016 11:41:53 -0500
 
 pump-server (0.1-1) unstable; urgency=low
 

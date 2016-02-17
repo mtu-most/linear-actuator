@@ -2,12 +2,12 @@ Source: pump-server
 Section: utils
 Priority: optional
 Maintainer: Bas Wijnen <wijnen@debian.org>
-Build-Depends: debhelper (>= 9), dh-python, python-all
+Build-Depends: debhelper (>= 9), dh-python, python3-all
 Standards-Version: 3.9.6
 
 Package: pump-server
 Architecture: all
-Depends: ${misc:Depends}, ${python:Depends}, python, python-websocketd, python-fhs
+Depends: ${misc:Depends}, ${python3:Depends}, python3, python3-websocketd, python3-fhs, python3-rpi.gpio
 Description: Server for controlling the open source syringe pump from a Raspberry Pi
  The open source syringe pump described at
  http://www.appropedia.org/Open-source_syringe_pump is a low cost open hardware
