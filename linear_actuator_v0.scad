@@ -316,7 +316,7 @@ module end_mount_holes(
 	// screw holes for retaining items against clamp
 	for (i = [-1, 1])
 		for (j = [-1, 0])
-			translate([i * (cc_guides - idler[0] - d_lead_nut) / 2, offset_guides + j * w_ends / 2, 0])
+			translate([i * ((cc_guides - idler[0] - d_guide_rod) / 4 + idler[0] / 2), offset_guides + j * w_ends / 2, 0])
 				cylinder(r = diameter / 2, h = thickness, $fn = fn, center = true);
 }
 
