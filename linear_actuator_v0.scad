@@ -5,6 +5,8 @@
 // http://www.appropedia.org/Category:MOST
 // It is released under CC-BY-SA
 // includes may be found at http://github.com/mtu-most/most-scad-libraries
+// Modified 20-Sep-2014 vik@diamondage.co.nz
+// Made the distance between guide rails increase with rail diameter.
 
 include<fasteners.scad>
 include<steppers.scad>
@@ -13,6 +15,7 @@ include<bearings.scad>
 $fn = 96;
 
 render_part(1);
+
 
 module render_part(part_to_render) {
 	if (part_to_render == 1) end_motor();
@@ -51,7 +54,7 @@ Secure plunger
 d_nozzle = 0.75;
 
 motor = NEMA17;
-cc_guides = 50;
+
 
 d_lead_screw = d_M5_screw;
 d_lead_nut = d_M5_nut;
@@ -63,6 +66,7 @@ offset_guides = 3.5; // offset from centerline of motor shaft towards top (+y)
 d_guide_rod = 6.4; // 6mm guide rods
 guide_bearing = bearing_lm6uu;
 pad_guide_bearing_radius = 3;
+cc_guides=43.6+d_guide_rod;	// Designed for 50mm spacing using 6.4mm guide holes
 
 pad_guide_ends = 3; // backing material behind ends of guide rods
 pad_guide_radius = 3; // material surrouding guide rods and bearings
